@@ -1,7 +1,16 @@
-﻿var builder = WebApplication.CreateBuilder(args);
+﻿using ETickets.Data;
+using Microsoft.EntityFrameworkCore;
+
+var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+//for using my sql database
+builder.Services.AddDbContext<AppDbContext>(options =>
+  options.UseMySql(builder.Configuration.GetConnectionString("eticketConnectionString"), ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("eticketConnectionString")))
+
+);
 
 var app = builder.Build();
 
@@ -18,11 +27,14 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+AppDbInitializer.Seed(app);
 
 app.Run();
 
