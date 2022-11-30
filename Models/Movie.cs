@@ -11,16 +11,26 @@ namespace ETickets.Models
         [Key]
         public int Id { get; set; }
 
+
+        [Display(Name ="Name")]
         public string Name { get; set; }
 
+        [Display(Name = "Description ")]
         public string Description { get; set; }
 
+
+        [Display(Name = "Image")]
         public string ImageURL { get; set; }
 
+
+        [Display(Name = "Price")]
         public double Price { get; set; }
 
+        [Display(Name = "StartDate")]
         public DateTime StartDate{ get; set; }
 
+
+        [Display(Name = "EndDate")]
         public DateTime EndDate { get; set; }
 
 

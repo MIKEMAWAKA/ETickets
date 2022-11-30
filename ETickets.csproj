@@ -11,9 +11,19 @@
     <None Remove="Microsoft.EntityFrameworkCore" />
     <None Remove="Microsoft.EntityFrameworkCore.Design" />
     <None Remove="Pomelo.EntityFrameworkCore.MySql" />
+    <None Remove="Views\Actors\" />
+    <None Remove="Views\Producers\" />
+    <None Remove="Views\Cinemas\" />
+    <None Remove="Views\Movies\" />
+    <None Remove="Data\Service\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />
+    <Folder Include="Views\Actors\" />
+    <Folder Include="Views\Producers\" />
+    <Folder Include="Views\Cinemas\" />
+    <Folder Include="Views\Movies\" />
+    <Folder Include="Data\Service\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.11" />

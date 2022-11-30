@@ -1,10 +1,13 @@
 ﻿using ETickets.Data;
+using ETickets.Data.Service;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddScoped<IActorService, ActorService>();
 
 //for using my sql database
 builder.Services.AddDbContext<AppDbContext>(options =>
