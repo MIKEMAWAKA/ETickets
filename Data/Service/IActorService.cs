@@ -8,15 +8,15 @@ namespace ETickets.Data.Service
 
         Task<IEnumerable<Actor>> GetActors();
 
-        Actor GetActor(int id);
+        Task<Actor> GetActor(int id);
 
-        void AddActor(Actor actor);
-
-
-        Actor UpdateActor(int id, Actor actor);
+        Task AddActor(Actor actor);
 
 
-        void DeleteActor(int id);
+        Task<Actor> UpdateActor(int id, Actor actor);
+
+
+       Task DeleteActor(int id);
 
 
     }

@@ -19,26 +19,37 @@ namespace ETickets.Data.Service
 
             return result;
         } 
-        public void AddActor(Actor actor)
+        public async Task AddActor(Actor actor)
         {
-            throw new NotImplementedException();
+            await dbContext.Actors.AddAsync(actor);
+           await  dbContext.SaveChangesAsync();
         }
 
-        public void DeleteActor(int id)
+        public async Task DeleteActor(int id)
         {
-            throw new NotImplementedException();
+            var result = await dbContext.Actors.FirstOrDefaultAsync(n => n.Id == id);
+
+           dbContext.Actors.Remove(result);
+
+            await dbContext.SaveChangesAsync();
         }
 
-        public Actor GetActor(int id)
+        public async Task<Actor> GetActor(int id)
         {
-            throw new NotImplementedException();
+            var result = await dbContext.Actors.FirstOrDefaultAsync(n => n.Id == id);
+
+            return result;
         }
 
     
 
-        public Actor UpdateActor(int id, Actor actor)
+        public async Task<Actor> UpdateActor(int id, Actor actor)
         {
-            throw new NotImplementedException();
+            dbContext.Update(actor);
+
+            await dbContext.SaveChangesAsync();
+
+            return actor;
         }
     }
 }

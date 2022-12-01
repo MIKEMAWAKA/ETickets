@@ -49,17 +49,12 @@
 
                    
 
-                    <td class="align-middle">
-                        <a class="btn btn-outline-primary text-black" href=""> <i class="bi bi-pencil-square" ></i>Edit</a>
+                      <td class="align-middle">
+                          <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i>Edit </a> |
+                          <a class="btn btn-outline-info" asp-action="Details" asp-route-id="@item.Id"><i class="bi bi-eye"></i>Details </a> |
+                          <a class="btn btn-danger text-white" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash"></i>Delete </a>
 
-                        <a class="btn btn-outline-info text-black" href=""> <i class="bi bi-eye" ></i>Details</a>
-
-
-
-                         <a class="btn btn-danger text-white" href=""> <i class="bi bi-trash" aria-hidden="true"></i>Delete</a>
-
-
-                         </td>
+                      </td>
 
 
 
@@ -78,7 +73,7 @@
 </div>
 
 
-<div class="text-white">
+<div class="text-white" style="position: fixed; right:25px; bottom:25px; " >
 
   <a asp-controller="Actors" asp-action="Create" class="btn btn-success">
     <i class="bi bi-plus-circle"></i>Add New

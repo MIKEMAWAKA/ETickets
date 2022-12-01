@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ETickets.Data;
 using ETickets.Data.Service;
+using ETickets.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -34,6 +35,10 @@ namespace ETickets.Controllers
             return View(data);
         }
 
+        // [BindProperty] 
+        // public Actor AddRequest {get;set;}
+      
+
 
         public  IActionResult Create()
         {
@@ -43,8 +48,114 @@ namespace ETickets.Controllers
             return View();
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Create([Bind("ProfilePictureURL,FullName,Bio")] Actor actor){
+
+            if(ModelState.IsValid)
+            {
+               
+              await  actorService.AddActor(actor);
+                return RedirectToAction(nameof(Index));
+            
+        
+              
+                Console.Write("ACTORSSS");
+
+            }
+            else
+            {
+                return View(actor);
+
+
+            }
+        
+
+        }
+
+
+        public async Task<IActionResult> Details(int id)
+        {
+
+
+            var actor = await actorService.GetActor(id);
+
+            if (actor == null) return View("NotFound");
+
+            return View(actor);
+
+        }
+
+
+
+        public async Task<IActionResult> Edit(int id)
+        {
+
+
+            var actor = await actorService.GetActor(id);
+
+            if (actor == null) return View("NotFound");
+
+            return View(actor);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit([Bind("Id,ProfilePictureURL,FullName,Bio")] int id,Actor actor)
+        {
+
+            if (ModelState.IsValid)
+            {
+
+                await actorService.UpdateActor(id,actor);
+                return RedirectToAction(nameof(Index));
+
+
+
+                Console.Write("ACTORSSS");
+
+            }
+            else
+            {
+                return View(actor);
+
+
+            }
+
+
+        }
+
+
+
+        public async Task<IActionResult> Delete(int id)
+        {
+
+
+            var actor = await actorService.GetActor(id);
+
+            if (actor == null) return View("NotFound");
+
+            return View(actor);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed( int id)
+        {
+
+            var actor = await actorService.GetActor(id);
+
+            if (actor == null) return View("NotFound");
+
+            await actorService.DeleteActor(id);
+            return RedirectToAction(nameof(Index));
+
+
+        }
+
+
 
 
     }
+
+
+
 }
 
