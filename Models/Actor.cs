@@ -1,9 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using ETickets.Data.Base;
 
 namespace ETickets.Models
 {
-    public class Actor
+    public class Actor: IEntityBase
     {
 
         [Key]

@@ -29,7 +29,7 @@ namespace ETickets.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var data = await actorService.GetActors();
+            var data = await actorService.GetAllAsync();
 
 
             return View(data);
@@ -54,7 +54,7 @@ namespace ETickets.Controllers
             if(ModelState.IsValid)
             {
                
-              await  actorService.AddActor(actor);
+              await  actorService.AddAsync(actor);
                 return RedirectToAction(nameof(Index));
             
         
@@ -77,7 +77,7 @@ namespace ETickets.Controllers
         {
 
 
-            var actor = await actorService.GetActor(id);
+            var actor = await actorService.GetByIdAsync(id);
 
             if (actor == null) return View("NotFound");
 
@@ -91,7 +91,7 @@ namespace ETickets.Controllers
         {
 
 
-            var actor = await actorService.GetActor(id);
+            var actor = await actorService.GetByIdAsync(id);
 
             if (actor == null) return View("NotFound");
 
@@ -105,7 +105,7 @@ namespace ETickets.Controllers
             if (ModelState.IsValid)
             {
 
-                await actorService.UpdateActor(id,actor);
+                await actorService.UpdateAsync(id,actor);
                 return RedirectToAction(nameof(Index));
 
 
@@ -129,7 +129,7 @@ namespace ETickets.Controllers
         {
 
 
-            var actor = await actorService.GetActor(id);
+            var actor = await actorService.GetByIdAsync(id);
 
             if (actor == null) return View("NotFound");
 
@@ -140,11 +140,11 @@ namespace ETickets.Controllers
         public async Task<IActionResult> DeleteConfirmed( int id)
         {
 
-            var actor = await actorService.GetActor(id);
+            var actor = await actorService.GetByIdAsync(id);
 
             if (actor == null) return View("NotFound");
 
-            await actorService.DeleteActor(id);
+            await actorService.DeleteAsync(id);
             return RedirectToAction(nameof(Index));
 
 
