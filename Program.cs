@@ -1,4 +1,5 @@
-﻿using ETickets.Data;
+﻿using System.Text.Json.Serialization;
+using ETickets.Data;
 using ETickets.Data.Service;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,6 +15,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
   options.UseMySql(builder.Configuration.GetConnectionString("eticketConnectionString"), ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("eticketConnectionString")))
 
 );
+builder.Services.AddControllers().AddJsonOptions(x =>
+                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 
 var app = builder.Build();
 

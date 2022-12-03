@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using ETickets.Data;
 using Microsoft.AspNetCore.Mvc;
@@ -23,6 +24,16 @@ namespace ETickets.Controllers
         {
             var cinemas = await dbContext.Cinemas.ToListAsync();
             return View(cinemas);
+        }
+
+        [HttpGet]
+        [Route("api/cinemas")]
+        public async Task<IActionResult> Get()
+        {
+
+
+            var cinemas = await dbContext.Cinemas.ToListAsync();
+            return Ok(cinemas);
         }
     }
 }

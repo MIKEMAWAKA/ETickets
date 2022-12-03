@@ -35,9 +35,19 @@ namespace ETickets.Controllers
             return View(data);
         }
 
+
+        [HttpGet]
+        [Route("api/actors")]
+        public async Task<IActionResult> Get()
+        {
+
+            var data = await actorService.GetAllAsync();
+            return Ok(data);
+        }
+
         // [BindProperty] 
         // public Actor AddRequest {get;set;}
-      
+
 
 
         public  IActionResult Create()
@@ -51,26 +61,40 @@ namespace ETickets.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([Bind("ProfilePictureURL,FullName,Bio")] Actor actor){
 
-            if(ModelState.IsValid)
-            {
-               
-              await  actorService.AddAsync(actor);
-                return RedirectToAction(nameof(Index));
-            
-        
-              
-                Console.Write("ACTORSSS");
-
-            }
-            else
+            if (!ModelState.IsValid)
             {
                 return View(actor);
-
-
             }
-        
+            await actorService.AddAsync(actor);
+            return RedirectToAction(nameof(Index));
+
 
         }
+
+        [HttpPost]
+        [Route("api/actors")]
+        public async Task<IActionResult> AddActor([FromBody] Actor actor)
+        {
+          
+
+
+            var saveactor = new Actor()
+            {
+
+                ProfilePictureURL = actor.ProfilePictureURL,
+                FullName = actor.FullName,
+  
+                Bio = actor.Bio
+
+            
+
+            };
+
+            await actorService.AddAsync(saveactor);
+
+            return Ok(saveactor);
+        }
+
 
 
         public async Task<IActionResult> Details(int id)

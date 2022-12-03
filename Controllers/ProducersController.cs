@@ -23,6 +23,16 @@ namespace ETickets.Data
             var data = await dbContext.Producers.ToListAsync();
             return View(data);
         }
+
+        [HttpGet]
+        [Route("api/producers")]
+        public async Task<IActionResult> Get()
+        {
+
+
+            var data = await dbContext.Producers.ToListAsync();
+            return Ok(data);
+        }
     }
 }
 
